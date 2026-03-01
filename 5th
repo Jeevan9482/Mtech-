@@ -3,22 +3,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.datasets import make_classification
 
-
-# -----------------------------
-# Activation Function
-# -----------------------------
-
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
 
 def sigmoid_derivative(x):
     return x * (1 - x)
-
-
-# -----------------------------
-# Neural Network Class
-# -----------------------------
 
 class NeuralNetwork:
 
@@ -77,11 +67,6 @@ class NeuralNetwork:
     def predict(self, X):
         return self.forward(X)
 
-
-# -----------------------------
-# Dataset Preparation
-# -----------------------------
-
 # Generate synthetic dataset
 X, y = make_classification(
     n_samples=500,
@@ -102,11 +87,6 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-
-# -----------------------------
-# Model Training
-# -----------------------------
-
 nn = NeuralNetwork(
     input_size=2,
     hidden_size=4,
@@ -115,15 +95,7 @@ nn = NeuralNetwork(
 )
 
 nn.train(X_train, y_train, epochs=10000)
-
-
-# -----------------------------
-# Model Evaluation
-# -----------------------------
-
 predictions = nn.predict(X_test)
 predictions = (predictions > 0.5).astype(int)
-
 accuracy = np.mean(predictions == y_test)
-
 print(f"\nAccuracy on test data: {accuracy * 100:.2f}%")
